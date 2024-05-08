@@ -1,94 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV</title>
-  <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers Data management</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+  
+
 </head>
+
 <body>
 
-    <h2>MOHAMMED ADHAM </h2>
-    <hr class="divider">
-    <div class="main-div">
-    
-      <h5 id="per"> Egypt, Fayoum
-      +201008978859<br>
-      Email: mohammedadhamm505@gmail.com<br>
-      GitHub:<a href="https://github.com/mohammedadhammo"> https://github.com/mohammedadhammo</a><br>
-      Linkedin:<a href="https://www.linkedin.com/in/mohammed-adham-936381247/"> https://www.linkedin.com/in/mohammed-adham-936381247/ </a>
-    </h5>
-  
-    </div>
-  
-    <h2>FRONT-END-DEVELOPER</h2>
-    <hr class="divider">
-    <div class="main-div">
-   <p>I`mn nignly motivated and detail-orlented with a passion for creating visually appealing, easy-to-use websites.</p>
-    
-    </div>
-  
-  
-    <h2 >TECHNICAL SKILLS</h2>
-    <hr class="divider">
-    <div class="main-div">
-    <ul>
-      <li>Html</li>
-      <li>CSS</li>
-      <li>JavaScript</li>
-      <li>Bootstrap</li>
-      <li>ReactJs</li>
-      <li>GitHub</li>
-      <li>Git</li>
-      <li>Java</li>
-      <li>SQL</li>
-      
-    </ul>
-    </div>
- 
-  
-    <h2>PROJECTS</h2>
-    <hr class="divider">
-    <div class="main-div">
-      <ul>
-        <li><span>Personal Websit: <a href="https://mohammedadhammo.github.io/My-Website/">https://mohammedadhammo.github.io/My-Website/</a></span> A personal website that includes my skills, work, and ways to communicate with me</li><br>
-        <li> <span> Fast-Food-website:<a href="https://mohammedadhammo.github.io/Fast-Food-website/">https://mohammedadhammo.github.io/Fast-Food-website/</a></span> A fast food ordering website using modern technologies like HTML, CSS, JavaScript, Bootstrap and React.<br> He has advanced design and development skills that enable him to create a seamless and engaging user experience,<br> making the ordering and delivery process easy and enjoyable for users.” </li><br>
-        <li><span>Invoice-management-system: <a href="https://mohammedadhammo.github.io/Invoice-management-system/"> https://mohammedadhammo.github.io/Invoice-management-system/ </a> </span> <br> A Invoices system designed and developed using HTML, CSS, and JavaScript. It efficiently creates and manages invoices,<br> providing a user-friendly interface for seamless Invoices processes." </li><br>
-        <li> <span> Customer-data-management-app:<a href="https://mohammedadhammo.github.io/Customer-data-management/">https://mohammedadhammo.github.io/Customer-data-management/</a></span> A customer data management system designed to efficiently organize and manage customer information. Built using HTML, CSS, and JavaScript, it provides a user-friendly interface for storing, updating,<br> and accessing customer data, enhancing overall customer relationship management."</li><br>
-        
-      </ul>
-    </div>
-  
- 
-  
-    <h2>SOFT SKILLS</h2>
-    <hr class="divider">
-    <div class="main-div">
-    <ul>
-      <li>Eagerness to continually learn and improve skills.</li>
-      <li>communicacion.problem-solving.time management.</li>
-      <li>strong understanding of responsive web design principles.</li>
-      <li>Teamwork</li>
-    </ul>
-  </div>
-  
- 
-    <h2>EDUCATION</h2>
-    <hr class="divider">
-    <div class="main-div">
-     <li <p> <span > Bachelor of information technology</span> | Expected Graduation 2026, Egyptian E-Learning University</p>
-     </li>
-    </div>
-  
-  
-  
-    <h2>LANGUAGES</h2>
-    <hr class="divider">
-   <section class="Languages">
-    <ul>
-      <li>Arabic</li>
-      <li>English</li>
-    </ul>
+   
+    <div class="container">
+        <div class="form-container">
+            <h1>New Client</h1>
+            <label for="name">Name*:</label>
+            <input type="text" id="name" required placeholder="Enter Full name">
 
+            <label for="phone">Phone Number*:</label>
+            <input type="text" id="phone" required placeholder="Enter phone number">
+
+            <label for="email"> Email:</label>
+            <input type="email" id="email" required placeholder=" Enter your email">
+
+            <label for="cost">Cost*: </label>
+            <input type="text" id="cost" required placeholder="Enter Cost">
+
+            <label for="sales">Sales*:</label>
+            <input type="text" id="sales" required placeholder="Enter Sales">
+
+            <label for="details">Details*:</label>
+            <textarea id="details" required maxlength="500" placeholder="Enter details"></textarea>
+
+            <button id="add" onclick="calculateProfit()">Add</button>
+            
+        </div>
+
+        <div class="table-container">
+            <h2>Customers data</h2>
+            <div class="search-container">
+            <input type="text" id="searchInput" oninput="searchCustomers()" placeholder="Search">
+            </div>
+            <label for="startDate">Beginning of period:</label>
+            <input type="date" id="startDate">
+            <label for="endDate">End of period:</label>
+            <input type="date" id="endDate">
+            <button id="showDataButton" onclick="showDataInTimeRange()">Show</button>
+            <button onclick="downloadSelectedDataToPDF()">Download</button>
+            <div class="actions-container">
+                <button id="red" onclick="deleteSelected()">Delete</button>
+                <button onclick="editSelected()">Edit</button>
+            </div>
+
+            <table id="customersTable">
+                <thead>
+                    <tr data-id="1">
+                        <th>Number</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Cost</th>
+                        <th>Sales</th>
+                        <th>Profit</th>
+                        <th>Details</th>
+                        <th>Date added</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+       
+        
+    
 </body>
+
 </html>
